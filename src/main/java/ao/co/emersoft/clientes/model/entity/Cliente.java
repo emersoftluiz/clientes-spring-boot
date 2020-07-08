@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 
 @Entity
 public class Cliente {
@@ -23,6 +24,15 @@ public class Cliente {
 	
 	@Column(name = "data_cadastro")
 	private LocalDate dataCadastro;
+	
+	@PrePersist
+	public void prePersist() {
+		setDataCadastro(LocalDate.now());
+	}
+	
+	public Cliente() {
+		
+	}
 
 	public Integer getId() {
 		return id;
