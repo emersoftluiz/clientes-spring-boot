@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Cliente {
 
@@ -23,6 +25,7 @@ public class Cliente {
 	private String cpf;
 	
 	@Column(name = "data_cadastro")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataCadastro;
 	
 	@PrePersist
