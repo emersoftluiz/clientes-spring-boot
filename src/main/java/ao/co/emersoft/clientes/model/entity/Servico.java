@@ -1,28 +1,31 @@
 package ao.co.emersoft.clientes.model.entity;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Cliente {
+public class Servico {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(nullable = false, length = 150)
-	private String nome;
+	private String descricao;
 	
-	@Column(nullable = false, length = 11)
-	private String cpf;
+	@ManyToOne
+	@JoinColumn(name = "id_cliente")
+	private Cliente cliente;
 	
-	@Column(name = "data_cadastro")
-	private LocalDate dataCadastro;
+	@Column
+	private BigDecimal valor;
 
 	public Integer getId() {
 		return id;
@@ -32,36 +35,36 @@ public class Cliente {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
-	public LocalDate getDataCadastro() {
-		return dataCadastro;
+	public BigDecimal getValor() {
+		return valor;
 	}
 
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
 	}
 
-	public Cliente(Integer id, String nome, String cpf, LocalDate dataCadastro) {
+	public Servico(Integer id, String descricao, Cliente cliente, BigDecimal valor) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.dataCadastro = dataCadastro;
+		this.descricao = descricao;
+		this.cliente = cliente;
+		this.valor = valor;
 	}
 
 	@Override
@@ -80,12 +83,12 @@ public class Cliente {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		Servico other = (Servico) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
 }
