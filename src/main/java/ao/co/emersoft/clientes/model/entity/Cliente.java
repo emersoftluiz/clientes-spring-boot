@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sun.istack.NotNull;
 
 @Entity
 public class Cliente {
@@ -19,9 +20,11 @@ public class Cliente {
 	private Integer id;
 	
 	@Column(nullable = false, length = 150)
+	@NotNull
 	private String nome;
 	
 	@Column(nullable = false, length = 11)
+	@NotNull
 	private String cpf;
 	
 	@Column(name = "data_cadastro", updatable = false)
